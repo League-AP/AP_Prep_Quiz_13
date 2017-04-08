@@ -1,1 +1,329 @@
+<head>
+  <h1 align="center">QUIZ</h1>
+</head>
 
+<body onload="startup()" style="background-color:#bbccdd;font-weight:bold;font-size:22px;">
+  <pre style="white-space:pre-wrap;"><code>
+  <div id="docBody"style="overflow:visible;"></div>
+</code></pre>
+</body>
+
+<script>
+  function Question(){
+    this.question = "";
+    this.choices = [];
+    this.correctAnswer = "";
+    this.userAnswer = "";
+    this.visited = false;
+  }
+  
+  var body;
+  
+  var questions = [];
+  
+  var currentQuestion;
+    
+  function startup(){
+    currentQuestion = 0;
+    
+    body = document.getElementById("docBody");
+    
+questions[0] = new Question();
+questions[0].question = "Consider the method minVal, shown below. minVal compares every value in the given array to min to find the smallest value, which is then returned. At the beginning of the code, min is set to 1. Which of the following is the best value to set min so that the method will compile and work as intended?\n\npublic int minVal (int[][] arr)\n{\n    int min = 1;\n\n    for (int i = 0; i < arr.length; i++)\n    {\n        for (int j = 0; j < arr[0].length; j++)\n        {\n            if (arr[i][j] < min)\n                min = arr[i][j];\n        }\n    }\n\n    return min;\n}";
+questions[0].choices[0] = "arr[i][j]";
+questions[0].choices[1] = "arr[0][0]";
+questions[0].choices[2] = "0";
+questions[0].choices[3] = "-1";
+questions[0].choices[4] = "1";
+questions[0].correctAnswer = 1;
+questions[1] = new Question();
+questions[1].question = "The fibonacci method is shown below. What is returned as a result of fibonacci(5)?\n\npublic int fibonacci (int num)\n{\n    if (num <= 1)\n        return num;\n\n    else\n        return fibonacci(num - 1) + fibonacci(num - 2);\n}\n\n";
+questions[1].choices[0] = "5";
+questions[1].choices[1] = "6";
+questions[1].choices[2] = "8";
+questions[1].choices[3] = "13";
+questions[1].choices[4] = "15";
+questions[1].correctAnswer = 0;
+questions[2] = new Question();
+questions[2].question = "Which of the following is equivalent to ! (!(x >= 7) && (x > 2))? ";
+questions[2].choices[0] = "(x >= 7) && (x > 2)";
+questions[2].choices[1] = "(x < 7) && (x <= 2)";
+questions[2].choices[2] = "(x >= 7) && (x < 2)";
+questions[2].choices[3] = "(x >= 7) || (x <= 2)";
+questions[2].choices[4] = "(x < 7) || (x < 2)";
+questions[2].correctAnswer = 3;
+questions[3] = new Question();
+questions[3].question = "You want to write a method that multiplies an integer num by itself exactly 10 times. Which of the following loops could you use?\n\n// I.\nint total = 1;\nfor (int i = 0; i < 10; i++)\n{\n    total = total * num;\n}\n\n// II.\nint count = 0;\nint total = 1;\n\nwhile (count < 10)\n{\n    count++;\n    total = total * num;\n}\n\n// III.\nint total = 1;\nfor (int i : 10)\n{\n    total = total * num;\n}";
+questions[3].choices[0] = "I only";
+questions[3].choices[1] = "II only";
+questions[3].choices[2] = "III only";
+questions[3].choices[3] = "I and II only";
+questions[3].choices[4] = "I and III only";
+questions[3].correctAnswer = 3;
+questions[4] = new Question();
+questions[4].question = "Consider the Animal and Cat classes, shown below. In another class, the line Animal fluffy = new Cat (\"orange\", \"Fluffy\", 11) appears. Which of the following declarations will compile without error?\n\npublic abstract class Animal\n{\n    private String color;\n    private String name;\n\n    public Animal (String theColor, String theName)\n    {\n        name = theName;\n        color = theColor;\n    }\n\n    public abstract String makeNoise();\n\n    public abstract int getWeight();\n}\n\npublic class Cat extends Animal\n{\n    private int weight;\n\n    public Cat (String theColor, String theName, int theWeight)\n    {\n        super (theColor, theName);\n        weight = theWeight;\n    }\n\n    public String makeNoise()\n    {\n        return \"Meow!\";\n    }\n\n    public int getWeight()\n    {\n        return weight;\n    }\n}\n\nI. fluffy.color;\n\nII. fluffy.getWeight();\n\nIII. fluffy.makeNoise();";
+questions[4].choices[0] = "I only";
+questions[4].choices[1] = "II only";
+questions[4].choices[2] = "II only";
+questions[4].choices[3] = "I and IIonly";
+questions[4].choices[4] = "II and III only";
+questions[4].correctAnswer = 4;
+questions[5] = new Question();
+questions[5].question = "The mysteryNum method is shown below. What is returned as a result of mysteryNum(5)?\n\n/** Precondition: all values of n are greater than 1 **/\npublic int mysteryNum (int n)\n{\n    if (n == 1)\n        return 1;\n\n    else\n        return n * mysteryNum(n - 1);\n}";
+questions[5].choices[0] = "720";
+questions[5].choices[1] = "120";
+questions[5].choices[2] = "24";
+questions[5].choices[3] = "15";
+questions[5].choices[4] = "This method results in an infinite loop.";
+questions[5].correctAnswer = 1;
+questions[6] = new Question();
+questions[6].question = "Convert 0011 0101 from binary to decimal. ";
+questions[6].choices[0] = "53";
+questions[6].choices[1] = "106";
+questions[6].choices[2] = "31";
+questions[6].choices[3] = "52";
+questions[6].choices[4] = "105";
+questions[6].correctAnswer = 0;
+questions[7] = new Question();
+questions[7].question = "Consider the binSearch method shown below, which uses a binary search algorithm to locate an integer key in an array. Assume intArr is an array of integers containing [5, 7, 9, 11, 21, 29, 36, 45]. How many iterations of the while loop occur in binSearch(5, intArr)?\n\npublic int binSearch(int key, int[] arr)\n{\n    int low = 0;\n    int high = arr.length - 1;\n\n    while (low <= high)\n    {\n        int mid = (low + high) / 2;\n\n        if (arr[mid] == key)\n            return mid;\n\n        else if (arr[mid] < key)\n            low = mid + 1;\n\n        else\n            high = mid - 1;\n\n    }\n\n   return -1;\n}\n\n";
+questions[7].choices[0] = "1";
+questions[7].choices[1] = "2";
+questions[7].choices[2] = "3";
+questions[7].choices[3] = "4";
+questions[7].choices[4] = "5";
+questions[7].correctAnswer = 2;
+questions[8] = new Question();
+questions[8].question = "The method numList is shown below. What is returned as a result of numList(5)?\n\n/** Precondition: all values of n are greater than 1 **/\npublic String numList (int n)\n{\n    if (n == 0)\n        return n + \"! \"\n\n    else\n        return numList(n - 1);\n}\n\n";
+questions[8].choices[0] = "5! 4! 3! 2! 1! 0!";
+questions[8].choices[1] = "0! 1! 2! 3! 4! 5!";
+questions[8].choices[2] = "0!";
+questions[8].choices[3] = "5!";
+questions[8].choices[4] = "This method will result in an infinite loop.";
+questions[8].correctAnswer = 2;
+questions[9] = new Question();
+questions[9].question = "An ArrayList of integers numbers contains the values [7, 2, 4, 6, 3]. What are the contents of numbers after the following code has been executed?\n\nnumbers.add(2, 8);\nnumbers.set(4, 1);\nnumbers.remove(3);\nnumbers.add(9);\nnumbers.set(5, 5);\n\n";
+questions[9].choices[0] = "[7, 2, 8, 1, 3, 5]";
+questions[9].choices[1] = "[7, 8, 1, 6, 5, 3]";
+questions[9].choices[2] = "[7, 2, 1, 3, 2, 5, 9]";
+questions[9].choices[3] = "[7, 2, 8, 1, 6, 5, 9]";
+questions[9].choices[4] = "[7, 2, 8, 1, 5]";
+questions[9].correctAnswer = 0;
+questions[10] = new Question();
+questions[10].question = "Consider the Breakfast and Meal classes shown below. Currently, the Breakfast class will not compile. Which of the following is the BEST solution to make Meal and Breakfast compile and run as intended?\n\npublic abstract class Meal\n{\n    public abstract String getMealTime;\n\n    public abstract List getMenu();\n\n    public abstract void addToMenu (String food);\n\n    public abstract double getCalories();\n}\n\npublic class Breakfast extends Meal\n{\n    private double calories;\n    private String time;\n    private List menu;\n\n    public Breakfast (double theCalories, String theTime,\n                      ArrayList theMenu)\n    {\n        calories = theCalories;\n        time = theTime;\n        menu = theMenu;\n    }\n\n    public String getMealTime()\n    {\n       return time;\n    }\n\n    public List getMenu()\n    {\n        return menu;\n    }\n\n    public double getCalories()\n    {\n         return calories;\n    }\n}\n\n";
+questions[10].choices[0] = "Remove the abstract keyword from the Meal class declaration.";
+questions[10].choices[1] = "Remove the abstract keyword from the Meal class and method declarations.";
+questions[10].choices[2] = "Create a constructor for the Meal class.";
+questions[10].choices[3] = "Remove the abstract keyword from the addToMenu method in the Meal class.";
+questions[10].choices[4] = "Define the addToMenu method in the Breakfast class.";
+questions[10].correctAnswer = 4;
+questions[11] = new Question();
+questions[11].question = "The method columnSum is shown below. columnSum returns the sum of all of the values in a specified column col of a 2-D array. Which of the following should replace /* to be completed */ so that the method will work as intended?\n\npublic int columnSum (int col, int[][] arr)\n{\n    int sum = 0;\n\n    for (int i = 0; i < arr.length; i++)\n    {\n        /* to be completed */\n    }\n\n    return sum;\n}";
+questions[11].choices[0] = "arr[col][i] += sum;";
+questions[11].choices[1] = "arr[i][col] += sum;";
+questions[11].choices[2] = "sum += arr[i][col];";
+questions[11].choices[3] = "sum += arr[col][i];";
+questions[11].choices[4] = "sum += arr[col][col];";
+questions[11].correctAnswer = 2;
+questions[12] = new Question();
+questions[12].question = "The array intArray contains [8, 12, 34, 6, 10, 14, 2, 4]. What are the contents of intArray after 3 passes of insertion sort? ";
+questions[12].choices[0] = "[6, 8, 12, 34, 2, 4, 10, 14]";
+questions[12].choices[1] = "[2, 4, 6, 34, 10, 14, 8, 12]";
+questions[12].choices[2] = "[2, 4, 34, 6, 10, 13, 8, 12]";
+questions[12].choices[3] = "[6, 8, 12, 34, 10, 14, 2, 4]";
+questions[12].choices[4] = "[6, 8, 10, 12, 34, 14, 2, 4]";
+questions[12].correctAnswer = 3;
+questions[13] = new Question();
+questions[13].question = "The Vehicle, Bike, and Car classes are shown. The objects a and b have been declared in a different class. Which of the following lines will compile without error?\n\npublic abstract class Vehicle\n{\n    private int wheels;\n    private String color;\n\n    public Vehicle (String theColor, int theWheels)\n    {\n        wheels = theWheels;\n        color = theColor;\n    }\n\n    public int numOfWheels()\n    {\n        return wheels;\n    }\n\n    public String getColor()\n    {\n        return color;\n    }\n}\n\npublic class Bike extends Vehicle\n{\n    public Bike (String theColor, int theWheels)\n    {\n        super (theColor, theWheels);\n    }\n\n    /* no other constructors or methods implemented */\n}\n\npublic class Car extends Vehicle\n{\n    public Car (String theColor, int theWheels()\n    {\n        super (theColor, theWheels);\n    }\n\n    /* no other constructors or methods implemented */\n}\n\n\nVehicle a = new Bike (\"green\", 2);\nVehicle b = new Car (\"red\", 4);\n\nI. b.wheels;\nII. a.getColor();\nIII. b.numOfWheels();\nIV. a.color;\n\n";
+questions[13].choices[0] = "II only";
+questions[13].choices[1] = "IV only";
+questions[13].choices[2] = "I and II only";
+questions[13].choices[3] = "I and IV only";
+questions[13].choices[4] = "II and III only";
+questions[13].correctAnswer = 4;
+questions[14] = new Question();
+questions[14].question = "The wordMixer class is shown below. What is returned as a result of wordMixer(\"penguin\")?\n\npublic String wordMixer (String s)\n{\n    if (s.length() == 1)\n        return s;\n\n    else\n        return wordMixer(s.substring(1)) + s.substring(0, 1);\n}\n\n";
+questions[14].choices[0] = "penguin";
+questions[14].choices[1] = "niugnep";
+questions[14].choices[2] = "pp";
+questions[14].choices[3] = "nninuinguinnguinenguin";
+questions[14].choices[4] = "enguinp";
+questions[14].correctAnswer = 1;
+questions[15] = new Question();
+questions[15].question = "The method divisible is shown below. In order for divisible to compile and run as intended, the method must return true if x is evenly divisible by y with no remainder, returning false otherwise. Which of the following could replace /* to be completed */ to make the code work as intended?\n\n/* Precondition: x and y are both integers greater than 0 */\n public boolean divisible (int x, int y)\n {\n     if ( /* to be completed */)\n         return true;\n\n     return false;\n }\n\n";
+questions[15].choices[0] = "x % y == 0";
+questions[15].choices[1] = "x % y == 1";
+questions[15].choices[2] = "x % y == 2";
+questions[15].choices[3] = "x / y == 1";
+questions[15].choices[4] = "x / y == 0";
+questions[15].correctAnswer = 0;
+questions[16] = new Question();
+questions[16].question = "A database containing 2,000 sorted integers must be searched using a binary search algorithm. What is the maximum number of iterations of the binary search method that must occur in order to find a specified value or guarantee that it is not in the database? ";
+questions[16].choices[0] = "8";
+questions[16].choices[1] = "11";
+questions[16].choices[2] = "20";
+questions[16].choices[3] = "100";
+questions[16].choices[4] = "2000";
+questions[16].correctAnswer = 1;
+questions[17] = new Question();
+questions[17].question = "The Person and Student classes are located below. Which of the following methods contains an example of method overloading?\n\npublic class Person\n{\n    private String name;\n    private int age;\n\n    public Person(String theName, int theAge)\n    {\n        name = theName;\n        age = theAge;\n    }\n\n    public String sayName()\n    {\n        return name;\n    }\n\n    public int getAge()\n    {\n        return age;\n    }\n}\n\npublic class Student extends Person\n{\n    private int grade;\n\n    public Student(String theName, int theAge, int theGrade)\n    {\n        super (theName, theAge);\n        grade = theGrade;\n    }\n\n    public String sayName()\n    {\n        return \"My name is \" + super.sayName();\n    }\n\n    public String sayName(String nickname)\n    {\n        return \"My name is \" + name + \" but I like to be called \" + nickname;\n    }\n\n    public int getGrade()\n    {\n        return grade;\n    }\n\n    public void changeGrade()\n    {\n        grade++;\n    }\n}\n\n";
+questions[17].choices[0] = "Having a constructor in the Student class that has a different parameter list than the constructor in the Person class.";
+questions[17].choices[1] = "Having a sayName() method in Person and in Student.";
+questions[17].choices[2] = "Having sayName() and sayName(String nickname) in the Student class.";
+questions[17].choices[3] = "Having the changeGrade() method in the Student class.";
+questions[17].choices[4] = "None of the above";
+questions[17].correctAnswer = 2;
+questions[18] = new Question();
+questions[18].question = "You are trying to write the countDown method. The countDown method takes a parameter num and decrements it by 1, printing every time until num equals 0. Which of the following loops will make the countDown method compile and work as intended?\n\n// I.\nfor (int i = num; num > 0; i--;)\n{\n    System.out.print (i + \" \");\n}\n\n// II.\nwhile (num > 0)\n{\n    System.out.print (num + \" \");\n    num --;\n}\n\n/// III.\nfor (int i : num)\n{\n    System.out.print(i + \" \");\n    i --;\n}\n";
+questions[18].choices[0] = "I only";
+questions[18].choices[1] = "II only";
+questions[18].choices[2] = "III only";
+questions[18].choices[3] = "I and II only";
+questions[18].choices[4] = "I and III only";
+questions[18].correctAnswer = 3;
+questions[19] = new Question();
+questions[19].question = "Consider the method threes. What is returned as a result of threes(4)?\n\npublic int threes (int n)\n{\n    if (n <= 1)\n        return 3;\n\n    else\n        return 3 * threes(n - 1);\n}\n\n";
+questions[19].choices[0] = "12";
+questions[19].choices[1] = "27";
+questions[19].choices[2] = "81";
+questions[19].choices[3] = "243";
+questions[19].choices[4] = "This method will result in an infinite loop.";
+questions[19].correctAnswer = 2;
+    
+    setDivText(questions[0]);
+    setButtons(questions[0]);
+  }
+  
+  function setDivText(q){
+    body.innerHTML += currentQuestion + 1 + ".<br>";
+    body.innerHTML += q.question + "<br><br><hr size=\"1\">";
+    
+    if(q.choices.length == 0){
+      body.innerHTML += "<br><textarea id=\"answer\" rows=\"10\" cols=\"80\">" +
+                         q.userAnswer + "</textarea><br>"; 
+    }else{
+      for(var i = 0; i < q.choices.length; i++){
+        if(i == q.userAnswer && q.visited){
+          body.innerHTML += convertChar(i) + "<input type=\"radio\" checked=\"true\"name=\"answer\" id=\"" + i + "\">" +q.choices[i] + "</input><br><br>";
+        }else{
+          body.innerHTML += "<input type=\"radio\" name=\"answer\" id=\"" + i + "\"><br>" +q.choices[i] + "</input><br><hr size=\"1\">";
+        }
+      }
+      
+      q.visited = true;
+    }
+  }
+  
+  function convertChar(a){
+    switch(a){
+        case 0: 
+        case "0": return "A";
+        case 1: 
+        case "1": return "B";
+        case 2: 
+        case "2": return "C";
+        case 3: 
+        case "3": return "D";
+        case 4: 
+        case "4": return "E";
+    }
+  }
+  
+  function setButtons(q){
+    if(q == questions[0]){
+      if(questions.length > 1){
+        body.innerHTML += "<button onclick=\"nextQuestion()\">NEXT</button>";
+      }else{
+        body.innerHTML += "<button onclick=\"submit()\">SUBMIT</button>";
+      }
+    } 
+    else if(q == questions[questions.length - 1]){
+      body.innerHTML += "<button onclick=\"previousQuestion()\">PREVIOUS</button>";
+      body.innerHTML += "<button onclick=\"submit()\">SUBMIT</button>";
+    }else{
+      body.innerHTML += "<button onclick=\"previousQuestion()\">PREVIOUS</button>";
+      body.innerHTML += "<button onclick=\"nextQuestion()\">NEXT</button>";
+    }
+  }
+  
+  function nextQuestion(){
+    if(setUserAnswer()){
+      body.innerHTML = "";
+    	currentQuestion++;
+    	setDivText(questions[currentQuestion]);
+    	setButtons(questions[currentQuestion]);
+    }
+  }
+  
+  function previousQuestion(){
+    if(setUserAnswer()){
+      body.innerHTML = "";
+    	currentQuestion--;
+    	setDivText(questions[currentQuestion]);
+    	setButtons(questions[currentQuestion]);
+    }
+  }
+  
+  function setUserAnswer(){
+    var q = questions[currentQuestion];
+    
+    if(q.choices.length > 0){
+      try{
+     		q.userAnswer = document.querySelector('input[name="answer"]:checked').id;
+        return true;
+      }catch(err){
+        alert("Make a choice. You can come back and change it later.");
+        return false;
+      }
+    }else{
+      q.userAnswer = document.getElementById("answer").value.trim();
+      return true;
+    }
+  }
+  
+  function checkQuiz(){
+    var total = 0;
+    for(var i = 0; i < questions.length; i++){
+      var q = questions[i];
+      if(q.choices.length == 0){
+        if(q.userAnswer.trim() == q.correctAnswer){
+          total++;
+        }
+      } else {
+        if(q.correctAnswer == q.userAnswer){
+          total++;
+        }
+      }
+    }
+    return total;
+  }
+  
+  function reloadPage(){
+    location = location;
+  }
+  
+  function submit(){
+    setUserAnswer();
+    
+    body.innerHTML = "You got " + checkQuiz() + " out of " + questions.length + " correct.<br><hr size=\"3\">";
+    for(var i = 0; i < questions.length; i++){
+      if(questions[i].choices.length > 0){
+        body.innerHTML += i + 1 + ". ";
+        body.innerHTML += questions[i].question + "<br><br>";
+        body.innerHTML += "Your Answer: <br>";
+        body.innerHTML += questions[i].choices[questions[i].userAnswer] + "<br>";
+        body.innerHTML += "Correct Answer: <br>";
+        body.innerHTML += questions[i].choices[questions[i].correctAnswer] + "<br>";
+        body.innerHTML += "<hr size=\"3\">";
+      }else{
+        body.innerHTML += i + 1 + ". ";
+        body.innerHTML += questions[i].question + "<br><br>";
+        body.innerHTML += "Your Answer: <br>";
+        body.innerHTML += questions[i].userAnswer + "<br>";
+        body.innerHTML += "Correct Answer: <br>";
+        body.innerHTML += questions[i].correctAnswer + "<br>";
+        body.innerHTML += "<hr size=\"3\">";
+      }
+    }
+            body.innerHTML += "<button onclick=\"reloadPage()\">START OVER</button>";
+  }
+</script>
